@@ -6,3 +6,8 @@ dist-ssr
 .env.local
 .env.production
 .DS_Store
+.vscode
+.idea
+*.log
+coverage
+.vercel
