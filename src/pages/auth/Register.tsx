@@ -17,7 +17,7 @@ export default function Register() {
     e.preventDefault()
     setError('')
     
-    const success = await registerUser({ ...formData, password: formData.password })
+    const success = await registerUser(formData)
     if (success) {
       navigate('/dashboard')
     } else {
