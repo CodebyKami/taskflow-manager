@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { useAuthStore } from '@/store/authStore'
+import { useProjectStore } from '@/store/projectStore'
+import { useEffect } from 'react'
 import AuthLayout from '@/layouts/AuthLayout'
 import DashboardLayout from '@/layouts/DashboardLayout'
 import Login from '@/pages/auth/Login'
@@ -16,7 +18,15 @@ import Settings from '@/pages/settings/Settings'
 import TimeTracking from '@/pages/time/TimeTracking'
 
 function App() {
-  const { user } = useAuthStore()
+  const { user, initializeDemoData } = useAuthStore()
+  const { initializeDemoData: initProjectData } = useProjectStore()
+
+  useEffect(() => {
+    initializeDemoData()
+    if (user) {
+      initProjectData(user.id)
+    }
+  }, [user, initializeDemoData, initProjectData])
 
   return (
     <>
